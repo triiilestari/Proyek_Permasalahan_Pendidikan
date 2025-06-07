@@ -209,4 +209,3 @@ Berdasarkan analisis data, berikut adalah karakteristik umum mahasiswa yang mela
 #### Lainnya:
 - Berdasarkan prediksi dengan model SVC, Mahasiswa dengan status Enrolled saat ini yang berjumlah 794 menunjukkan hasil prediksi 602 Graduate dan 192 Dropout
 - Untuk menghindari kejadian dropout secara masif, bisa dilakukan beberapa Rekomendasi Action Items sebagai strategi proaktif berbasis data serta penguatan sistem dukungan akademik dan finansial.
->>>>>>> 59b8f57 (upload task)
