@@ -45,7 +45,7 @@ Proyek ini bertujuan untuk menganalisis status rate di Jaya Jaya Maju dan member
     - Seleksi fitur yang mempengaruhi status untuk pembelajaran model
 3. Membangun Model Prediktif:
     - Membangun model prediktif untuk mengidentifikasi mahasiswa dengan risiko tinggi dropout berdasarkan pola-pola yang ditemukan dalam data
-    - Menggunakan teknik seperti Support Vector Machine (SVM), K-Nearest Neighbor (KNN), Naive Bayes (NB), dan Random Forest (RF) untuk memprediksi status
+    - Menggunakan teknik seperti Random Forest (RF), Linear Regression (LR), K-Nearest Neighbors (KNN), Support Vectore Machine (SVM), Naive Bayes (NB), Decision Tree (DT), dan Gradien Boosting(GB) untuk memprediksi status
     - Melakukan evaluasi pada model-model yang telah dibangun untuk menentukan model yang paling sesuai untuk prediksi status di Jaya Jaya Maju
 4. Pengembangan Business Dashboard:
     - Membuat dashboard interaktif yang menampilkan metrik-metrik penting terkait status rate, seperti faktor-faktor yang mempengaruhi, dan analisis demografis
@@ -59,7 +59,7 @@ Proyek ini bertujuan untuk menganalisis status rate di Jaya Jaya Maju dan member
 **Sumber data**: Dataset yang digunakan dalam proyek ini adalah [Dataset Student's Performnace Jaya Jaya Maju](https://github.com/dicodingacademy/dicoding_dataset/tree/main/students_performance) sesuai dengan instruksi dari submission proyek ini.
 
 **Setup environment**: Proyek ini membutuhkan lingkungan sederhana untuk menjalankan analisis data dan dashboard. Berikut langkah-langkah untuk mempersiapkan environment:
-**- Menjalankan notebook Proyek_Permasalahan_HR.ipynb**
+**- Menjalankan notebook Proyek_Permasalahan_Pendidikan.ipynb**
 1. Instalasi Dependensi:
 
     - Pastikan semua dependensi yang dibutuhkan sudah terpasang. Anda dapat memeriksa daftar dependensi di dalam requirements.txt.
@@ -72,7 +72,7 @@ Proyek ini bertujuan untuk menganalisis status rate di Jaya Jaya Maju dan member
     - Jika menggunakan Google Colab, unggah file notebook ke dalam Google Drive dan buka melalui Google Colab.
     - Jika menggunakan Jupyter Notebook, jalankan perintah berikut untuk membuka file:
         ```
-        jupyter notebook Proyek_Permasalahan_HR.ipynb
+        jupyter notebook Proyek_Permasalahan_Pendidikan.ipynb
         ```
 3. Menjalankan Semua Sel:
     - Jalankan seluruh isi notebook untuk melihat hasil analisis data, temuan, dan insight yang diperoleh.
@@ -92,7 +92,7 @@ Proyek ini bertujuan untuk menganalisis status rate di Jaya Jaya Maju dan member
 **- Menjalankan file python prototype sistem machine learning**:
 1. Buka tautan berikut dibrowser untuk akses prototype streamlit community cloud:
     [🔗 Akses Prototype di Browser](https://blank-app-vdpsvbe3gtq.streamlit.app/)
-    - Ubah-ubah fitur pengaturan untuk memaksimalkan analisis
+    - Ubah-ubah input secara manual atau upload file untuk memprediksi data mahasiswa lainnya
 2. Jalankan ini untuk running prototype secara lokal dengan streamlit:
     - Pastikan semua dependensi yang dibutuhkan sudah terpasang. Anda dapat memeriksa daftar dependensi di dalam requirements.txt.
     Untuk menginstal dependensi, jalankan perintah berikut di terminal atau command prompt:
@@ -103,24 +103,29 @@ Proyek ini bertujuan untuk menganalisis status rate di Jaya Jaya Maju dan member
         ```
         streamlit run streamlit_app.py
         ```
-    - Fitur pada prototype meliputi 
-        - Filter fitur penting mahasiswa
-        - Grafik distribusi fitur
-        - Perbandingan Graduate vs Dropout
-        - Ringkasan Statistik
-        - Download data filtered
+    - Fitur pada prototype meliputi:
+        - Upload file csv untuk prediksi batch
+        - Mengisi form prediksi single data mahasiswa
+        - Memprediksi status mahasiswa
+        - Download hasil prediksi mahasiswa
 
 ## Business Dashboard
 Dashboard interaktif dapat menyajikan hasil analisis dan prediksi status secara real-time, memberi pihak kampus wawasan cepat dan terukur. Elemen utama yang dapat dilihat dari dashboard meliputi:
 
-1. Tren Status:
-    - Visualisasi tren status mahasiswa berdasarkan berbagai faktor seperti Curricular_units_2nd_sem_approved, Curricular_units_2nd_sem_grade, Tuition_fees_up_to_date, Curricular_units_1nd_sem_approved, Curricular_units_1nd_sem_grade
-    - Membantu pihak kampus mengidentifikasi pola yang berulang dan kelompok yang rentan dropout
-2. Feature Importance:
-    - Visualisasi kontribusi fitur utama seperti Curricular_units_2nd_sem_approved dan Curricular_units_2nd_sem_grade terhadap risiko dropout
-    - Visualisasi infomasi lain terkait sebaran Tuition_fees_up_to_date
-3. Informasi Prediksi Risiko:
-    - Menampilkan tabel daftar prediksi mahasiswa dengan probabilitas dropout diatas 70%
+1. KPI Ringkasan (Scorecards):
+    - Average Age of Students at Enrollment : 23.27
+    - Number of Students : 4,424
+    - Average Admission Grade : 126.98
+2. Pie Chart untuk gambaran prosentase setiap fitur Status, Gender, Scholarship Holder Distribution, dan Debtors
+3. Analisis Gabungan (Bar Charts) diantaranya:
+    - Record Count by Status and Scholarship Holder
+        Bar chart tersegmentasi: Graduate / Dropout / Enrolled dibandingkan berdasarkan status beasiswa
+    - Record Count by Status and Debtor
+        Perbandingan status dengan apakah mahasiswa memiliki tunggakan
+    - Record Count by Status and Tuition Fees Up-to-date
+        Menunjukkan keterkaitan antara status mahasiswa dan apakah pembayaran biaya kuliah mereka sudah up-to-date
+    - Record Count by Course and Status dengan Bar chart horizontal
+        Jumlah mahasiswa berdasarkan program studi (e.g., Nursing, Management, Social Service) yang dibedakan berdasarkan status (Graduate, Dropout, Enrolled)
 
 **Tutorial Mengakses Dashboard**
 
@@ -128,70 +133,75 @@ Lakukan sesuai arahan pada poin Persiapan - Setup Environment pada bagian **Cara
 
 ## Conclusion
 
-#### **1. Faktor-Faktor Penyebab Attrition**
-
+### 1. Faktor-Faktor Penyebab Status
 Berdasarkan hasil analisis data dan model prediktif, berikut adalah faktor-faktor utama yang memengaruhi status kelulusan atau dropout mahasiswa:
 1. **Curricular_units_2nd_sem_approved**
    - Jumlah mata kuliah yang disetujui pada semester 2 sangat berpengaruh terhadap keberhasilan mahasiswa.
-2. **Curricular_units_2nd_sem_grade**
-    - Nilai akademik di semester kedua mencerminkan pencapaian belajar dan konsistensi mahasiswa.
-3. **Tuition_fees_up_to_date_1**
-    - Status pembayaran uang kuliah menjadi indikator penting yang berkorelasi dengan risiko dropout.
-4. **Curricular_units_2nd_sem_enrolled**
-    - Jumlah mata kuliah yang diambil di semester 2 menunjukkan beban studi mahasiswa.
-5. **Curricular_units_1st_sem_approved**
+2. **Curricular_units_1st_sem_approved**
     - Capaian di semester pertama juga memberi dampak, meski lebih kecil dibanding semester kedua.
+3. **Curricular_units_2nd_sem_grade**
+    - Nilai akademik di semester kedua mencerminkan pencapaian belajar dan konsistensi mahasiswa.
+4. **Curricular_units_1nd_sem_grade**
+    - Nilai akademik di semester satu mencerminkan pencapaian belajar dan konsistensi mahasiswa.
+5. **Tuition_fees_up_to_date_1**
+    - Status pembayaran uang kuliah menjadi indikator penting yang berkorelasi dengan risiko dropout.
 
-#### **2. Model Prediktif Terbaik**
-Model terbaik yang digunakan dalam proyek ini adalah **Support Vector Classifier (SVC)**, dengan metrik performa weighted average sebagai berikut:
-- **Accuracy**: 0.91
-- **Precision**: 0.89
+      
+### 2. Model Prediktif Terbaik
+Model terbaik yang digunakan dalam proyek ini adalah **Random Forest (RF)** dengan paramater sesuai hasil tuning model, dengan metrik performa weighted average sebagai berikut:
+- **Accuracy**: 0.93
+- **Precision**: 0.93
 - **Recall**: 0.93
-- **F1-Score**: 0.91
+- **F1-Score**: 0.93
 
-Model ini menunjukkan performa terbaik dibandingkan model lainnya seperti Random Forest, K-Nearest Neighbors (KNN), dan Naive Bayes.
+Model ini menunjukkan performa terbaik dibandingkan model lainnya seperti Linear Regression, K-Nearest Neighbors (KNN), Support Vectore Machine, Naive Bayes, Decision Tree, dan Gradien Boosting. Berikut hasil keseluruhan model tanpa tuning model.
 
-#### **3. Jawaban terhadap Pertanyaan Bisnis**
-1. **Apa faktor utama yang memengaruhi Status Mahasiswa?**
+![Gambar Evaluasi Model](image_dashboard/evalusi_model.png)
 
-    Faktor utama adalah performa akademik pada semester kedua dan status pembayaran uang kuliah, khususnya:
-    - Curricular_units_2nd_sem_approved
-    - Curricular_units_2nd_sem_grade
-    - Tuition_fees_up_to_date
+### Jawaban terhadap Pertanyaan Institusi
+**1. Apa faktor utama yang memengaruhi Status Mahasiswa?**
+
+Faktor utama adalah performa akademik pada semester kedua dan status pembayaran uang kuliah, khususnya:
+- Curricular_units_2nd_sem_approved
+- Curricular_units_1nd_sem_approved
+- Curricular_units_2nd_sem_grade
+- Curricular_units_1nd_sem_grade
+- Tuition_fees_up_to_date
   
-2. **Bagaimana tingkat performa awal memengaruhi Status Mahasiswa?**
-    -  Performa pada semester pertama (Curricular_units_1st_sem_grade, Curricular_units_1st_sem_approved) memiliki pengaruh sedang, dan nilai saat masuk (Admission_grade) berpengaruh kecil.
-  
-3. **Apa pola perilaku Mahasiswa dengan risiko keluar tinggi?**
-    - Mahasiswa dengan sedikit mata kuliah yang disetujui di semester 2, nilai rendah, serta tunggakan pembayaran cenderung memiliki risiko dropout tinggi.
-  
-4. **Apakah kita memiliki alat bantu untuk memantau Status Mahasiswa?**
-    - Ya, model prediktif yang dibangun dapat dijadikan dasar untuk dashboard monitoring risiko dropout, dengan kemungkinan integrasi ke sistem akademik.
+**2. Bagaimana tingkat performa awal memengaruhi Status Mahasiswa?**
+- Performa pada semester pertama (Curricular_units_1st_sem_approved) memiliki pengaruh yang penting, nilai awal semester (Curricular_units_1st_sem_grade) memiliki pengaruh yang sedang dan nilai saat masuk (Admission_grade) berpengaruh kecil.
 
-#### **4. Karakteristik Umum Mahasiswa yang Melakukan Droput**
+  
+**3. Apa pola perilaku Mahasiswa dengan risiko keluar tinggi?**
+
+- Mahasiswa dengan sedikit mata kuliah yang disetujui di semester 1 dan 2, nilai rendah, serta tunggakan pembayaran cenderung memiliki risiko dropout tinggi.
+  
+**4. Apakah kita memiliki alat bantu untuk memantau Status Mahasiswa?**
+- Ya, model prediktif yang dibangun dapat dijadikan dasar untuk dashboard monitoring risiko dropout, dengan kemungkinan integrasi ke sistem akademik.
+
+### Karakteristik Umum Mahasiswa yang Dropout
 Berdasarkan analisis data, berikut adalah karakteristik umum mahasiswa yang melakukan dropout:
 
-1. **Akademik:**
-    - Menunjukkan performa buruk di semester 2 (nilai dan jumlah mata kuliah disetujui rendah).
-    - Jumlah evaluasi lebih sedikit dibanding mahasiswa yang graduate.
+**1. Akademik:**
+- Menunjukkan performa buruk di semester 2 (nilai dan jumlah mata kuliah disetujui rendah).
+- Jumlah evaluasi lebih sedikit dibanding mahasiswa yang graduate.
 
-2. **Faktor Finansial:**
-    - Sering menunggak pembayaran SPP (tuition not up-to-date).
-    - Tidak konsisten dalam proses akademik dari semester 1 ke 2.
+**2. Faktor Finansial:**
+- Sering menunggak pembayaran SPP (tuition not up-to-date).
 
-3. **Sosial Ekonomi & Kebutuhan Khusus:**
-    - Sebagian besar mahasiswa dropout tidak memiliki kebutuhan pendidikan khusus.
-    - Status penerima beasiswa tidak menunjukkan pengaruh signifikan terhadap risiko dropout, namun tetap penting sebagai bentuk dukungan terhadap mahasiswa berprestasi.
+**3. Sosial Ekonomi & Kebutuhan Khusus:**
 
-4. **Demografis:**
-    - Umur saat pendaftaran tidak terlalu berpengaruh, namun mahasiswa yang lebih muda cenderung lebih stabil.
+- Sebagian besar mahasiswa dropout tidak memiliki kebutuhan pendidikan khusus.
+- Status penerima beasiswa tidak menunjukkan pengaruh signifikan terhadap risiko dropout, namun tetap penting sebagai bentuk dukungan terhadap mahasiswa berprestasi.
 
+**4. Demografis:**
+- Umur saat pendaftaran tidak terlalu berpengaruh, namun mahasiswa yang lebih muda cenderung lebih stabil.
 
 ### Rekomendasi Action Items untuk Institusi
 **1. Intervensi Dini Berdasarkan Semester 2:**
 
 - Fokus pada monitoring nilai dan capaian mata kuliah di semester kedua.
-- Sistem alert otomatis untuk mahasiswa dengan pencapaian < 50% pada semester ini.
+- Memiliki sistem alert otomatis untuk mahasiswa dengan pencapaian < 50% pada semester ini.
   
 **2. Pendekatan Finansial:**
   
@@ -205,7 +215,3 @@ Berdasarkan analisis data, berikut adalah karakteristik umum mahasiswa yang mela
 **4. Kelas Remedial atau Pendampingan Akademik:**
   
 - Khususnya ditujukan pada mahasiswa yang performanya rendah sejak semester pertama.
-
-#### Lainnya:
-- Berdasarkan prediksi dengan model SVC, Mahasiswa dengan status Enrolled saat ini yang berjumlah 794 menunjukkan hasil prediksi 602 Graduate dan 192 Dropout
-- Untuk menghindari kejadian dropout secara masif, bisa dilakukan beberapa Rekomendasi Action Items sebagai strategi proaktif berbasis data serta penguatan sistem dukungan akademik dan finansial.
